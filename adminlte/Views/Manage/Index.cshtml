@@ -1,0 +1,42 @@
+﻿@model adminlte.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div class="row">
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-8 col-sm-12 col-md-8">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Configurar perfil</h6>
+            </div>
+            <div class="card-body">
+                <dl class="dl-horizontal">
+                    <dt>Cambio de clvae:</dt>
+                    <dd>
+                        [
+                        @if (Model.HasPassword)
+                        {
+                            @Html.ActionLink("Cambiar clave", "ChangePassword")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Crear", "SetPassword")
+                        }
+                        ]
+                    </dd>
+           
+                </dl>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+

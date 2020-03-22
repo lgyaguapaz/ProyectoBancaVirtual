@@ -1,0 +1,91 @@
+﻿@*@model IEnumerable<adminlte.Models.Cartera.CreditoViewModel>*@
+@using System.Data
+@model DataSet
+
+@{
+    ViewBag.Title = "Mis Creditos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <ol class="breadcrumb">
+            @ViewBag.Title
+        </ol>
+    </section>
+
+
+    <section class="content">
+
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+            </div>
+            <div class="col-lg-8 col-sm-12 col-md-8">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">@ViewBag.Title</h6>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Tables.Count > 0)
+                        {
+
+
+                            <table class="table table-responsive-sm table-bordered">
+                                <thead>
+                                    <tr>
+
+                                        <th> Operación</th>
+                                        <th>Tipo de Crédito</th>
+                                        <th>Estado</th>
+                                        <th>Saldo</th>
+                                        <th>Estado de Credito</th>
+                                    </tr>
+                                <thead>
+                                <tbody>
+                                    @*@foreach (var item in Model)*@
+                                    @foreach (DataRow row in Model.Tables[0].Rows)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @*<a id="@row["operacion"]" href="/Cartera/Transacciones?data=@row["key"]">@row["operacion"]</a>*@
+                                                @using (Html.BeginForm("Transacciones", "Cartera", FormMethod.Post, new { id = @row["key"] }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+
+                                                    <input type="hidden" name="operacion" value="@row["operacion"]" />
+                                                    <input type="hidden" name="estado" value="@row["estado"]" />
+                                                    <input type="hidden" name="oficial" value="" />
+                                                    <input type="hidden" name="saldo" value="@row["saldo"]" />
+                                                    <input type="hidden" name="producto" value="@row["tipoCredito"]" />
+
+                                                    <input type="submit" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"  value="@row["operacion"]" />
+                                                }
+
+                                            </td>
+                                            <td>@row["tipoCredito"]</td>
+                                            <td>@row["estado"]</td>
+
+                                            <td>@row["saldo"]</td>
+                                            <td>@row["estadoCredito"]</td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <ol class="breadcrumb">
+                               No existen datos
+                            </ol>
+                        }
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-2 col-md-2">
+            </div>
+        </div>
+    </section>
+</div>

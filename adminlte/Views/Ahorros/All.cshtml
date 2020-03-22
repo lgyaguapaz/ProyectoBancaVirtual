@@ -1,0 +1,102 @@
+﻿@using System.Data
+@model DataSet
+
+@{
+    ViewBag.Title = "Transacciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <ol class="breadcrumb">
+            Cuentas de Ahorros
+        </ol>
+    </section>
+
+
+    <section class="content">
+
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+            </div>
+            <div class="col-lg-8 col-sm-12 col-md-8">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Mis Cuentas</h6>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Tables.Count > 0)
+                        {
+                            <table class="table table-responsive-sm table-bordered">
+                                <thead>
+                                    <tr>
+
+                                        <th> Cuenta</th>
+                                        <th>Tipo de Cuenta</th>
+                                        <th>Estado</th>
+                                        <th>Disponible</th>
+                                        <th>Saldo Cuenta</th>
+                                    </tr>
+                                <thead>
+                                <tbody>
+                                    @*@foreach (var item in Model)*@
+                                    @foreach (DataRow row in Model.Tables[0].Rows)
+
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a id="@row["key"]" href="#" onclick="verDetallecuenta( ' @row["cuenta"]','@row["tipoCuenta"]','@row["estado"]','@row["disponible"] ')"
+                                                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"   data-toggle="modal" data-target="#MainModal">
+                                                    @row["cuenta"]
+                                                </a>
+                                                
+                                            </td>
+                                            <td>@row["tipoCuenta"]</td>
+                                            <td>@row["estado"]</td>
+                                            <td>@row["disponible"]</td>
+                                            <td>@row["saldo"]</td>
+
+                                        </tr>
+                                     
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <ol class="breadcrumb">
+                                No existen datos
+                            </ol>
+                        }
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-2 col-md-2">
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+@section Scripts
+{
+
+    <script>
+        function verDetallecuenta(cuenta, tipo, estado, disponible) {
+            var data = '<b>Cuenta: </b>' + cuenta + '<br/>' +
+                '<b>Tipo de Cuenta: </b>' + tipo+ '<br/>' +
+                '<b>Estado: </b>' + estado + '<br/>' +
+                '<b>Saldo disponible: </b>' + disponible + '<br/>' 
+                +"<a href='/Ahorros/Accounttransactions' class='d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm'> Transacciones >> </a > ";
+            document.getElementById("MainModalBoddy").innerHTML = data;
+            document.getElementById("MainModalTitle").innerHTML = 'Detalle de la cuenta: <b>' + cuenta +'</b>';
+        }
+    </script>
+
+
+
+}
+

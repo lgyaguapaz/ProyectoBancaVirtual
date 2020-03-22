@@ -1,0 +1,93 @@
+﻿@using Microsoft.AspNet.Identity
+<!-- Left side column. contains the logo and sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("Dashboardv1", "Dashboard")">
+        <div class="sidebar-brand-icon">
+            <i class="fas fa-list-ol"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Banca Virtual</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item  @Html.IsSelected(action: "Dashboardv1") ">
+        <a href="@Url.Action("Dashboardv1", "Dashboard")" class=" nav-link">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Posición Consolidada</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Opciones
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item  @Html.IsSelected(controller: "Ahorros")">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Ahorros</span>
+        </a>
+        <div id="collapseTwo" class="collapse @Html.IsShow(controller: "Ahorros")" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+
+                <a class="collapse-item @Html.IsSelected(action: "All")" href="@Url.Action("All", "Ahorros")">Cuentas de Ahorro</a>
+                <a class="collapse-item @Html.IsSelected(action: "Accounttransactions")" href="@Url.Action("Accounttransactions", "Ahorros")">Transacciones</a>
+            </div>
+        </div>
+    </li>
+
+
+
+    <li class="nav-item  @Html.IsSelected(action: "Credito") ">
+        <a href="@Url.Action("Index", "Cartera")" class=" nav-link">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Cartera</span>
+        </a>
+    </li>
+    <li class="nav-item  @Html.IsSelected(action: "Depositosplazo") ">
+        <a href="@Url.Action("Index", "Depositosplazo")" class=" nav-link">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Depositos Plazo</span>
+        </a>
+    </li>
+    <li class="nav-item @Html.IsSelected(controller: "Transfrencias")">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTransferencias" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Transferencias</span>
+        </a>
+        <div id="collapseTransferencias" class="collapse @Html.IsShow(controller: "Transferencias")" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+
+                <a class="collapse-item @Html.IsSelected(action: "CuentasPropias")" href="@Url.Action("CuentasPropias", "Transferencias")">Propias</a>
+                <a class="collapse-item @Html.IsSelected(action: "Internas")" href="@Url.Action("Internas", "Transferencias")">Internas</a>
+                <a class="collapse-item @Html.IsSelected(action: "Interbancarias")" href="@Url.Action("Interbancarias", "Transferencias")">Interbancarias</a>
+                <a class="collapse-item @Html.IsSelected(action: "Declaracion")" href="@Url.Action("Declaracion", "Transferencias")">Declaración</a>
+
+            </div>
+        </div>
+    </li>
+    <li class="nav-item @Html.IsSelected(controller: "Simuladores")">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Simuladores</span>
+        </a>
+        <div id="collapsePages" class="collapse @Html.IsShow(controller: "Simuladores")" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+
+                <a class="collapse-item @Html.IsSelected(action: "Credito")" href="@Url.Action("Credito", "Simuladores")">Simulador de Crédito</a>
+                <a class="collapse-item @Html.IsSelected(action: "Plazofijo")" href="@Url.Action("Plazofijo", "Simuladores")">Simulador Plazo Fijo</a>
+
+            </div>
+        </div>
+    </li>
+
+
+</ul>

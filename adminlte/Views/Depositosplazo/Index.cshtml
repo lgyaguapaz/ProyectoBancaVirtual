@@ -1,0 +1,86 @@
+﻿@model IEnumerable<adminlte.Models.DepositosPlazo.DepositosPlazoViewModel>
+
+@{
+    ViewBag.Title = "Depósitos a plazo fijo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <ol class="breadcrumb">
+            @ViewBag.Title
+        </ol>
+    </section>
+
+
+    <section class="content">
+
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+            </div>
+            <div class="col-lg-8 col-sm-12 col-md-8">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">@ViewBag.Title</h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-responsive-sm table-bordered">
+                            <thead>
+                                <tr>
+
+                                    <th> @Html.DisplayNameFor(model => model.operacion)</th>
+                                    <th>@Html.DisplayNameFor(model => model.estado)</th>
+                                    <th>@Html.DisplayNameFor(model => model.fechavencimiento)</th>
+                                    <th>@Html.DisplayNameFor(model => model.plazo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.interes)</th>
+                                    <th>@Html.DisplayNameFor(model => model.valor)</th>
+                                </tr>
+                            <thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    
+                                <tr>
+                                    
+                                    <td>
+                                        @*<a id="@item.operacion" href="/Depositosplazo/Detalle?data=@item.operacion">@item.operacion</a>*@
+                                        @using (Html.BeginForm("Detalle", "Depositosplazo", FormMethod.Post, new { id = item.key }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("operacion", item.operacion);
+                                            @Html.Hidden("estado", item.estado);
+                                            @Html.Hidden("cliente", item.cliente);
+                                            @Html.Hidden("fechavencimiento", item.fechavencimiento);
+                                            @Html.Hidden("fechacreacion", item.fechacreacion);
+                                            @Html.Hidden("interes", item.interes);
+                                            @Html.Hidden("key", item.key);
+                                            @Html.Hidden("valor", item.valor);
+                                            @Html.Hidden("tasa", item.tasa);
+                                            @Html.Hidden("tipo", item.tipo);
+                                            @Html.Hidden("oficial", item.oficial);
+                                            @Html.Hidden("plazo", item.plazo);
+
+
+                                            <input type="submit" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" value="@item.operacion" />
+
+                                        }
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.estado)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.fechavencimiento)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.plazo)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.interes)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.valor)</td>
+
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-2 col-md-2">
+            </div>
+        </div>
+    </section>
+</div>
